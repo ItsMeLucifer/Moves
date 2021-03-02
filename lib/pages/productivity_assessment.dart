@@ -8,6 +8,7 @@ class ProductivityAssessment extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final handler = watch(appHandler);
+    final firebase = watch(firebaseVM);
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,24 +76,30 @@ class ProductivityAssessment extends ConsumerWidget {
                 })),
         Padding(
           padding: const EdgeInsets.only(top: 130.0),
-          child: Container(
-              width: 250,
-              height: 50,
-              decoration: BoxDecoration(
-                  border: Border.all(color: handler.primaryColor, width: 4),
-                  borderRadius: BorderRadius.circular(50),
-                  color: handler.secondaryColor),
-              child: Center(
-                child: Text(
-                  'Save',
-                  style: TextStyle(
-                      color: handler.textColor,
-                      fontFamily: handler.fontFamily,
-                      fontSize: 25,
-                      shadows: [handler.textShadow]),
-                  textAlign: TextAlign.center,
-                ),
-              )),
+          child: GestureDetector(
+            onTap: () {
+              firebase.sendProductivityData(
+                  handler.productivityLevel.toInt(), new DateTime.now());
+            },
+            child: Container(
+                width: 250,
+                height: 50,
+                decoration: BoxDecoration(
+                    border: Border.all(color: handler.primaryColor, width: 4),
+                    borderRadius: BorderRadius.circular(50),
+                    color: handler.secondaryColor),
+                child: Center(
+                  child: Text(
+                    'Save',
+                    style: TextStyle(
+                        color: handler.textColor,
+                        fontFamily: handler.fontFamily,
+                        fontSize: 25,
+                        shadows: [handler.textShadow]),
+                    textAlign: TextAlign.center,
+                  ),
+                )),
+          ),
         )
       ],
     );

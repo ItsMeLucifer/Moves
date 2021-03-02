@@ -1,4 +1,5 @@
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:productivity/main.dart';
@@ -15,9 +16,10 @@ class HomeScreen extends ConsumerWidget {
       extendBody: true,
       bottomNavigationBar: FluidNavBar(
         icons: [
-          FluidNavBarIcon(icon: Icons.home, extras: {'label': 'Home'}),
-          FluidNavBarIcon(icon: Icons.add),
-          FluidNavBarIcon(icon: Icons.settings, extras: {'label': 'Settings'})
+          FluidNavBarIcon(icon: CupertinoIcons.home, extras: {'label': 'Home'}),
+          FluidNavBarIcon(icon: CupertinoIcons.add),
+          FluidNavBarIcon(
+              icon: CupertinoIcons.settings, extras: {'label': 'Settings'})
         ],
         onChange: (index) {
           handler.actualPageIndex = index;
