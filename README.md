@@ -1,16 +1,10 @@
-# productivity
+# **Moves**
 
-A new Flutter project.
+The Moves app was created with productivity in mind. Have you ever found yourself not being motivated enough to complete side projects? With Moves, you'll be able to add your own projects and compare your productivity scores with your friends so you can motivate each other.
 
-## Getting Started
+## Concept
+Below is the concept of the application, of course a lot can change in the future, but this is our starting point.
+![Concept-art](./github/img/moves_concept.png)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
