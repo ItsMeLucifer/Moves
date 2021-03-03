@@ -26,6 +26,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   fluid_bottom_nav_bar: ^1.2.0
   flutter_riverpod: ^0.12.4
+  jiffy: ^3.0.1
   syncfusion_flutter_core: ^18.4.46
   syncfusion_flutter_sliders: ^18.4.44-beta
 

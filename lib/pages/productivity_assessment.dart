@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:productivity/main.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
+import 'package:jiffy/jiffy.dart';
 
 class ProductivityAssessment extends ConsumerWidget {
   @override
@@ -78,8 +79,8 @@ class ProductivityAssessment extends ConsumerWidget {
           padding: const EdgeInsets.only(top: 130.0),
           child: GestureDetector(
             onTap: () {
-              firebase.sendProductivityData(
-                  handler.productivityLevel.toInt(), new DateTime.now());
+              firebase.sendProductivityData(handler.productivityLevel.toInt(),
+                  Jiffy(new DateTime.now()).format("dd.MM.y"));
             },
             child: Container(
                 width: 250,
