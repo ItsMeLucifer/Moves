@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "117430437328",
+    "project_id": "moves-cde3e",
+    "storage_bucket": "moves-cde3e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117430437328:android:4c65b0ee0289123fb765d5",
+        "android_client_info": {
+          "package_name": "com.example.productivity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "117430437328-ncvai0hv105fvsfa6hp88d8evv809j6u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsF2mqPwPLfsjPOVokWBQU_oyKFhg5lac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "117430437328-ncvai0hv105fvsfa6hp88d8evv809j6u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
