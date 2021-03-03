@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:productivity/main.dart';
 
-class Charts extends ConsumerWidget {
+class Projects extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final handler = watch(appHandler);
@@ -11,16 +11,15 @@ class Charts extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Center(
-          child: Text(
-            'Charts',
-            style: TextStyle(
-                fontSize: 50,
-                color: handler.textColor,
-                fontFamily: handler.fontFamily,
-                shadows: [handler.textShadow]),
-            textAlign: TextAlign.center,
-          ),
-        ),
+            child: Text(
+          'Projects',
+          style: TextStyle(
+              fontSize: 30,
+              fontFamily: handler.fontFamily,
+              color: handler.textColor,
+              shadows: [handler.textShadow]),
+          textAlign: TextAlign.center,
+        ))
       ],
     );
   }
