@@ -17,112 +17,113 @@ class ProjectCreator extends ConsumerWidget {
         TextEditingController(text: handler.projectDescription);
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 80.0, bottom: 30),
-            child: Center(
-              child: Text(
-                'Project Creator',
-                style: TextStyle(
-                    fontFamily: handler.fontFamily,
-                    fontSize: 30,
-                    color: handler.textColor,
-                    shadows: [handler.textShadow]),
-                textAlign: TextAlign.center,
-              ),
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: Text(
+              'Project Creator',
+              style: TextStyle(
+                  fontFamily: handler.fontFamily,
+                  fontSize: 30,
+                  color: handler.textColor,
+                  shadows: [handler.textShadow]),
+              textAlign: TextAlign.center,
             ),
           ),
-          Container(
-            width: 350,
-            height: 80,
-            child: TextFormField(
-              key: handler.nameKey,
-              controller: _nameController,
-              cursorColor: handler.primaryColor,
-              validator: (String value) {
-                if (value.isEmpty || value == null) {
-                  return 'Name is Required';
-                }
-              },
-              onSaved: (String value) {
-                handler.projectName = value;
-              },
-              decoration: InputDecoration(
-                labelStyle: TextStyle(color: handler.primaryColor),
-                labelText: 'Project Name',
-                hintText: 'My Awesome Project',
-                hintStyle: TextStyle(color: handler.secondaryColor),
-                icon: Icon(
-                  Icons.contact_mail,
-                  color: handler.primaryColor,
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: handler.primaryColor,
+          Column(
+            children: [
+              Container(
+                width: 350,
+                height: 60,
+                child: TextFormField(
+                  key: handler.nameKey,
+                  controller: _nameController,
+                  cursorColor: handler.primaryColor,
+                  validator: (String value) {
+                    if (value.isEmpty || value == null) {
+                      return 'Name is Required';
+                    }
+                  },
+                  onSaved: (String value) {
+                    handler.projectName = value;
+                  },
+                  decoration: InputDecoration(
+                    labelStyle: TextStyle(color: handler.primaryColor),
+                    labelText: 'Project Name',
+                    hintText: 'My Awesome Project',
+                    hintStyle: TextStyle(color: handler.secondaryColor),
+                    icon: Icon(
+                      Icons.contact_mail,
+                      color: handler.primaryColor,
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: handler.primaryColor,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          Container(
-            width: 350,
-            height: 80,
-            child: TextFormField(
-              controller: _tagsController,
-              cursorColor: handler.primaryColor,
-              style: TextStyle(color: handler.primaryColor),
-              decoration: InputDecoration(
-                labelStyle: TextStyle(color: handler.primaryColor),
-                labelText: 'Technologies/Tools',
-                hintText: 'Photoshop, Flutter, Pencils',
-                hintStyle: TextStyle(color: handler.secondaryColor),
-                icon: Icon(
-                  Icons.contact_mail,
-                  color: handler.primaryColor,
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: handler.primaryColor,
+              Container(
+                width: 350,
+                height: 60,
+                child: TextFormField(
+                  controller: _tagsController,
+                  cursorColor: handler.primaryColor,
+                  style: TextStyle(color: handler.primaryColor),
+                  decoration: InputDecoration(
+                    labelStyle: TextStyle(color: handler.primaryColor),
+                    labelText: 'Technologies/Tools',
+                    hintText: 'Photoshop, Flutter, Pencils',
+                    hintStyle: TextStyle(color: handler.secondaryColor),
+                    icon: Icon(
+                      Icons.contact_mail,
+                      color: handler.primaryColor,
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: handler.primaryColor,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          Container(
-            width: 350,
-            height: 80,
-            child: TextFormField(
-              controller: _descriptionController,
-              cursorColor: handler.primaryColor,
-              style: TextStyle(color: handler.primaryColor),
-              decoration: InputDecoration(
-                labelStyle: TextStyle(color: handler.primaryColor),
-                labelText: 'Description',
-                hintText: 'Blind people helping app!',
-                hintStyle: TextStyle(color: handler.secondaryColor),
-                icon: Icon(
-                  Icons.contact_mail,
-                  color: handler.primaryColor,
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: handler.primaryColor,
+              Container(
+                width: 350,
+                height: 60,
+                child: TextFormField(
+                  controller: _descriptionController,
+                  cursorColor: handler.primaryColor,
+                  style: TextStyle(color: handler.primaryColor),
+                  decoration: InputDecoration(
+                    labelStyle: TextStyle(color: handler.primaryColor),
+                    labelText: 'Description',
+                    hintText: 'Blind people helping app!',
+                    hintStyle: TextStyle(color: handler.secondaryColor),
+                    icon: Icon(
+                      Icons.contact_mail,
+                      color: handler.primaryColor,
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: handler.primaryColor,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 15.0, bottom: 15),
-            child: Text('Project progress: ',
-                style: TextStyle(
-                    fontSize: 17,
-                    color: handler.primaryColor,
-                    fontFamily: handler.fontFamily,
-                    shadows: [handler.textShadow])),
-          ),
+          Text('Project progress: ',
+              style: TextStyle(
+                  fontSize: 17,
+                  color: handler.primaryColor,
+                  fontFamily: handler.fontFamily,
+                  shadows: [handler.textShadow])),
           SfSliderTheme(
               data: SfSliderThemeData(
                 activeTrackColor: handler.primaryColor,
@@ -159,9 +160,6 @@ class ProjectCreator extends ConsumerWidget {
                   onChanged: (dynamic index) {
                     handler.projectProgress = index;
                   })),
-          SizedBox(
-            height: 50,
-          ),
           Container(
             width: 200,
             height: 50,
@@ -171,7 +169,7 @@ class ProjectCreator extends ConsumerWidget {
                 borderRadius: BorderRadius.circular(15)),
             child: FlatButton(
                 onPressed: () {
-                  firebase.sendProject(
+                  firebase.createProject(
                       _nameController.text,
                       _tagsController.text,
                       _descriptionController.text,
@@ -182,6 +180,9 @@ class ProjectCreator extends ConsumerWidget {
                 child: Text('Save',
                     style: TextStyle(color: handler.primaryColor))),
           ),
+          SizedBox(
+            height: 25,
+          )
         ],
       ),
       backgroundColor: handler.backgroundColor,

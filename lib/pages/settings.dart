@@ -6,22 +6,33 @@ class Settings extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final handler = watch(appHandler);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Center(
-          child: Text(
-            'Settings',
-            style: TextStyle(
-                fontSize: 50,
-                color: handler.textColor,
-                fontFamily: handler.fontFamily,
-                shadows: [handler.textShadow]),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
+    final firebase = watch(firebaseVM);
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+              width: 200,
+              height: 50,
+              decoration: BoxDecoration(
+                  color: handler.secondaryColor,
+                  border: Border.all(color: handler.primaryColor, width: 5),
+                  borderRadius: BorderRadius.circular(15)),
+              child: FlatButton(
+                  onPressed: () {
+                    firebase.signOut();
+                  },
+                  child: Text(
+                    'Sign out!',
+                    style: TextStyle(
+                        color: handler.textColor,
+                        fontFamily: handler.fontFamily,
+                        shadows: [handler.textShadow]),
+                  )))
+        ],
+      ),
     );
   }
 }

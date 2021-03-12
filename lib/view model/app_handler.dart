@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:productivity/model/screen_dimensions.dart';
 
 class AppHandler extends ChangeNotifier {
   //_________COMMON_________
@@ -8,9 +9,35 @@ class AppHandler extends ChangeNotifier {
   Color get backgroundColor => Color.fromRGBO(29, 120, 116, 1);
   Color get tertiaryColor => Colors.black;
   Color get textColor => Colors.white;
+  Color get greyedOutColor => Colors.grey[400];
   String get fontFamily => 'Clarity';
   Object get textShadow =>
       Shadow(blurRadius: 10.0, color: secondaryColor, offset: Offset(5.0, 5.0));
+
+  // ScreenDimensions getHeightAndWidth(BuildContext context) {
+  //   double width = MediaQuery.of(context).size.width;
+  //   double height = MediaQuery.of(context).size.height;
+  //   ScreenDimensions dimensions = new ScreenDimensions(width, height);
+  //   notifyListeners();
+  //   return dimensions;
+  // }
+  //_________AUTHENTICATION PAGE____________
+  bool _registerMode = false;
+  bool get registerMode => _registerMode;
+  set registerMode(bool value) {
+    _registerMode = value;
+    notifyListeners();
+  }
+
+  TextEditingController registerEmailController =
+      TextEditingController(text: '');
+  TextEditingController registerPasswordController =
+      TextEditingController(text: '');
+  TextEditingController registerNicknameController =
+      TextEditingController(text: '');
+  TextEditingController loginEmailController = TextEditingController(text: '');
+  TextEditingController loginPasswordController =
+      TextEditingController(text: '');
 
   //_________BOTTOM NAVIGATION BAR____________
   int _actualPageIndex = 0;
