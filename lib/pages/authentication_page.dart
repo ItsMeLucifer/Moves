@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:productivity/main.dart';
-import 'package:productivity/widgets/Authentication%20Page%20Widgets/login.dart';
-import 'package:productivity/widgets/Authentication%20Page%20Widgets/register.dart';
+import 'package:productivity/widgets/Authentication%20Page/login.dart';
+import 'package:productivity/widgets/Authentication%20Page/register.dart';
 
 class AuthenticationPage extends ConsumerWidget {
   @override

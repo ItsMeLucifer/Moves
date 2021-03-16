@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 enum Status { Authenticated, Unauthenticated }
+enum ProductivityDataInfo { Existing, Nonexistent, Unspecified }
 
 class Firebase extends ChangeNotifier {
   //_________AUTHENTICATION_________
@@ -70,6 +71,7 @@ class Firebase extends ChangeNotifier {
 
   //_________DATA HANDLING_________
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+  //---ACCOUNT---
   Future<void> createAnAccount(String nickname) async {
     await users.doc(auth.currentUser.uid).set({
       //zmienic na add
@@ -82,6 +84,7 @@ class Firebase extends ChangeNotifier {
 
   //dodac funkcje updateAccount
 
+  //---PROJECTS---
   Future<void> createProject(
       String name, String tags, String description, double progress) async {
     await users.doc(auth.currentUser.uid).collection('projects').add({
@@ -114,7 +117,42 @@ class Firebase extends ChangeNotifier {
         .delete();
   }
 
-  void sendProductivityData(int value, dynamic date) {
-    //SEND TO FIREBASE SERVER
+  //---PRODUCTIVITY ASSESSMENT---
+  DocumentSnapshot doc;
+
+  ProductivityDataInfo _documentExists = ProductivityDataInfo.Nonexistent;
+  ProductivityDataInfo get documentExists => _documentExists;
+  set documentExists(ProductivityDataInfo value) {
+    _documentExists = value;
+    notifyListeners();
+  }
+
+  Future<void> doesProductivityDataExists(dynamic date) async {
+    documentExists = ProductivityDataInfo.Unspecified;
+    await users
+        .doc(auth.currentUser.uid)
+        .collection('productivity')
+        .doc(date.toString())
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        documentExists = ProductivityDataInfo.Existing;
+        doc = documentSnapshot;
+      } else {
+        documentExists = ProductivityDataInfo.Nonexistent;
+      }
+    });
+  }
+
+  Future<void> sendProductivityData(int value, dynamic date) async {
+    await users
+        .doc(auth.currentUser.uid)
+        .collection('productivity')
+        .doc(date.toString())
+        .set({'value': value, 'date': date});
+  }
+
+  void updateProductivityData(int value, dynamic date) {
+    //UPDATE PRODUCTIVITY DATA
   }
 }

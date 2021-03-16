@@ -16,6 +16,8 @@ class Wrapper extends ConsumerWidget {
       case Status.Authenticated:
         return HomeScreen();
         break;
+      default:
+        return AuthenticationPage();
     }
   }
 }

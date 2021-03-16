@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:productivity/model/screen_dimensions.dart';
 
 class AppHandler extends ChangeNotifier {
   //_________COMMON_________

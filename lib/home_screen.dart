@@ -11,14 +11,14 @@ import 'package:productivity/pages/settings.dart';
 
 class HomeScreen extends ConsumerWidget {
   @override
-  List<Widget> pages = <Widget>[
-    Charts(),
-    Friends(),
-    ProductivityAssessment(),
-    Projects(),
-    Settings()
-  ];
   Widget build(BuildContext context, ScopedReader watch) {
+    List<Widget> pages = <Widget>[
+      Charts(),
+      Friends(),
+      ProductivityAssessment(),
+      Projects(),
+      Settings()
+    ];
     final handler = watch(appHandler);
     return Scaffold(
       extendBody: true,

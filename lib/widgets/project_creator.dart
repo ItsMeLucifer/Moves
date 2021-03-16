@@ -46,6 +46,8 @@ class ProjectCreator extends ConsumerWidget {
                   validator: (String value) {
                     if (value.isEmpty || value == null) {
                       return 'Name is Required';
+                    } else {
+                      return '';
                     }
                   },
                   onSaved: (String value) {
