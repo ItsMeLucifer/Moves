@@ -11,8 +11,8 @@ class ProductivityAssessment extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     //final handler = watch(appHandler);
     final firebase = watch(firebaseVM);
-    firebase.doesProductivityDataExists(
-        Jiffy(new DateTime.now()).format("dd.MM.y"));
+    // firebase.doesProductivityDataExists(
+    //     Jiffy(new DateTime.now()).format("dd.MM.y"));
     switch (firebase.documentExists) {
       case ProductivityDataInfo.Existing:
         return UpdateAssessment();

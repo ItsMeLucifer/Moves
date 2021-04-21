@@ -11,99 +11,120 @@ class AddNewAssessment extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     final firebase = watch(firebaseVM);
     final handler = watch(appHandler);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 100.0),
-          child: Text(
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 100),
+          Text(
+            'Hello Patrick,',
+            style: TextStyle(
+              color: handler.textColor2,
+              fontSize: 30,
+              fontFamily: handler.fontFamily,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 30),
+          Text(
             'How was your productivity today?',
             style: TextStyle(
-                color: handler.textColor,
-                fontSize: 30,
-                fontFamily: handler.fontFamily,
-                shadows: [handler.textShadow]),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 40.0, bottom: 30),
-          child: Text(
-            '${handler.productivityLevel.toInt()}%',
-            style: TextStyle(
-                color: handler.textColor,
-                fontSize: 50,
-                fontFamily: handler.fontFamily,
-                shadows: [handler.textShadow]),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        SfSliderTheme(
-            data: SfSliderThemeData(
-              activeTrackColor: handler.primaryColor,
-              inactiveTrackColor: handler.secondaryColor,
-              activeTrackHeight: 10.0,
-              inactiveTrackHeight: 5.0,
-              thumbColor: Color.fromRGBO(127, 85, 125, 1),
-              thumbRadius: 20,
-              activeLabelStyle: TextStyle(
-                  color: handler.textColor,
-                  fontSize: 12,
-                  fontFamily: handler.fontFamily,
-                  shadows: [handler.textShadow]),
-              inactiveLabelStyle: TextStyle(
-                  color: handler.textColor,
-                  fontSize: 12,
-                  fontFamily: handler.fontFamily,
-                  shadows: [handler.textShadow]),
+              color: handler.textColor3,
+              fontSize: 25,
+              fontFamily: handler.fontFamily,
             ),
-            child: SfSlider(
-                min: 0.0,
-                max: 100.0,
-                interval: 100,
-                thumbIcon: Center(
-                  child: Text(
-                    handler.emoji[handler.productivityLevel ~/ 10],
-                    style: TextStyle(fontSize: 35),
-                    textAlign: TextAlign.center,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 20),
+          Container(
+            width: handler.screenWidth * 0.5,
+            height: handler.screenWidth * 0.5,
+            decoration: BoxDecoration(
+                color: handler.secondaryColor,
+                borderRadius: BorderRadius.circular(handler.screenWidth * 0.25),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 2),
                   ),
+                ]),
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(
+                '${handler.productivityLevel.toInt()}%',
+                style: TextStyle(
+                  color: handler.textColor2,
+                  fontSize: 50,
+                  fontFamily: handler.fontFamily,
                 ),
-                showLabels: true,
-                showTicks: false,
-                showDivisors: false,
-                value: handler.productivityLevel,
-                onChanged: (dynamic index) {
-                  handler.productivityLevel = index;
-                })),
-        Padding(
-          padding: const EdgeInsets.only(top: 130.0),
-          child: GestureDetector(
-            onTap: () {
-              firebase.sendProductivityData(handler.productivityLevel.toInt(),
-                  Jiffy(new DateTime.now()).format("dd.MM.y"));
-            },
-            child: Container(
-                width: 250,
-                height: 50,
-                decoration: BoxDecoration(
-                    border: Border.all(color: handler.primaryColor, width: 4),
-                    borderRadius: BorderRadius.circular(50),
-                    color: handler.secondaryColor),
-                child: Center(
-                  child: Text(
-                    'Save',
-                    style: TextStyle(
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          SizedBox(height: 30),
+          Container(
+            width: handler.screenWidth * 0.9,
+            child: SfSliderTheme(
+                data: SfSliderThemeData(
+                  activeTrackColor: handler.primaryColor,
+                  inactiveTrackColor: handler.tertiaryColor,
+                  activeTrackHeight: 10.0,
+                  inactiveTrackHeight: 7.0,
+                  thumbColor: handler.backgroundColor,
+                  thumbRadius: 15,
+                  activeLabelStyle: TextStyle(
+                      color: handler.textColor,
+                      fontSize: 12,
+                      fontFamily: handler.fontFamily,
+                      shadows: [handler.textShadow]),
+                  inactiveLabelStyle: TextStyle(
+                      color: handler.textColor,
+                      fontSize: 12,
+                      fontFamily: handler.fontFamily,
+                      shadows: [handler.textShadow]),
+                ),
+                child: SfSlider(
+                    min: 0.0,
+                    max: 100.0,
+                    showLabels: false,
+                    showTicks: false,
+                    showDivisors: false,
+                    value: handler.productivityLevel,
+                    onChanged: (dynamic index) {
+                      handler.productivityLevel = index;
+                    })),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 40.0),
+            child: GestureDetector(
+              onTap: () {
+                firebase.sendProductivityData(handler.productivityLevel.toInt(),
+                    Jiffy(new DateTime.now()).format("dd.MM.y"));
+              },
+              child: Container(
+                  width: handler.screenWidth * 0.6,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: handler.primaryColor),
+                  child: Center(
+                    child: Text(
+                      'Save',
+                      style: TextStyle(
                         color: handler.textColor,
                         fontFamily: handler.fontFamily,
-                        fontSize: 25,
-                        shadows: [handler.textShadow]),
-                    textAlign: TextAlign.center,
-                  ),
-                )),
-          ),
-        )
-      ],
+                        fontSize: 20,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  )),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

@@ -14,9 +14,9 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     List<Widget> pages = <Widget>[
       Charts(),
-      Friends(),
-      ProductivityAssessment(),
       Projects(),
+      ProductivityAssessment(),
+      Friends(),
       Settings()
     ];
     final handler = watch(appHandler);
@@ -26,9 +26,9 @@ class HomeScreen extends ConsumerWidget {
         icons: [
           FluidNavBarIcon(
               icon: CupertinoIcons.chart_pie, extras: {'label': 'Home'}),
-          FluidNavBarIcon(icon: CupertinoIcons.person_2),
-          FluidNavBarIcon(icon: CupertinoIcons.add),
           FluidNavBarIcon(icon: CupertinoIcons.doc_on_doc),
+          FluidNavBarIcon(icon: CupertinoIcons.add),
+          FluidNavBarIcon(icon: CupertinoIcons.person_2),
           FluidNavBarIcon(
               icon: CupertinoIcons.settings, extras: {'label': 'Settings'})
         ],
@@ -36,10 +36,10 @@ class HomeScreen extends ConsumerWidget {
           handler.actualPageIndex = index;
         },
         style: FluidNavBarStyle(
-            barBackgroundColor: handler.primaryColor,
-            iconSelectedForegroundColor: handler.primaryColor,
+            barBackgroundColor: handler.secondaryColor,
+            iconSelectedForegroundColor: handler.quaternaryColor,
             iconBackgroundColor: Color.fromRGBO(1, 1, 1, 0),
-            iconUnselectedForegroundColor: handler.backgroundColor),
+            iconUnselectedForegroundColor: handler.quaternaryColor),
       ),
       body: pages[handler.actualPageIndex],
       backgroundColor: handler.backgroundColor,

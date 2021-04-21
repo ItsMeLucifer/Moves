@@ -1,25 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+enum ProjectPageStatus { inProgress, complete }
+
 class AppHandler extends ChangeNotifier {
   //_________COMMON_________
-  Color get secondaryColor => Color.fromRGBO(20, 83, 80, 1);
-  Color get primaryColor => Colors.white;
-  Color get backgroundColor => Color.fromRGBO(29, 120, 116, 1);
-  Color get tertiaryColor => Colors.black;
+  Color get secondaryColor => Colors.white;
+  Color get primaryColor => Color.fromRGBO(127, 127, 219, 1);
+  Color get backgroundColor => Color.fromRGBO(238, 243, 251, 1);
+  Color get tertiaryColor => Color.fromRGBO(177, 181, 205, 1);
+  Color get quaternaryColor => Color.fromRGBO(186, 191, 202, 1);
   Color get textColor => Colors.white;
+  Color get textColor2 => Color.fromRGBO(127, 127, 219, 1);
+  Color get textColor3 => Color.fromRGBO(11, 72, 112, 1);
   Color get greyedOutColor => Colors.grey[400];
-  String get fontFamily => 'Clarity';
+  String get fontFamily => 'Comfortaa';
   Object get textShadow =>
-      Shadow(blurRadius: 10.0, color: secondaryColor, offset: Offset(5.0, 5.0));
+      Shadow(blurRadius: 10.0, color: Colors.black, offset: Offset(5.0, 5.0));
 
-  // ScreenDimensions getHeightAndWidth(BuildContext context) {
-  //   double width = MediaQuery.of(context).size.width;
-  //   double height = MediaQuery.of(context).size.height;
-  //   ScreenDimensions dimensions = new ScreenDimensions(width, height);
-  //   notifyListeners();
-  //   return dimensions;
-  // }
+  double screenWidth = 0;
+
   //_________AUTHENTICATION PAGE____________
   bool _registerMode = false;
   bool get registerMode => _registerMode;
@@ -28,15 +28,9 @@ class AppHandler extends ChangeNotifier {
     notifyListeners();
   }
 
-  TextEditingController registerEmailController =
-      TextEditingController(text: '');
-  TextEditingController registerPasswordController =
-      TextEditingController(text: '');
-  TextEditingController registerNicknameController =
-      TextEditingController(text: '');
-  TextEditingController loginEmailController = TextEditingController(text: '');
-  TextEditingController loginPasswordController =
-      TextEditingController(text: '');
+  TextEditingController emailController = TextEditingController(text: '');
+  TextEditingController passwordController = TextEditingController(text: '');
+  TextEditingController nicknameController = TextEditingController(text: '');
 
   //_________BOTTOM NAVIGATION BAR____________
   int _actualPageIndex = 0;
@@ -67,6 +61,15 @@ class AppHandler extends ChangeNotifier {
     '😍',
     '😍'
   ];
+  //PROJECTS PAGE
+  ProjectPageStatus _projectPageStatus = ProjectPageStatus.inProgress;
+  int get projectPageStatus => _projectPageStatus.index;
+  set projectPageStatus(int value) {
+    value == 0
+        ? _projectPageStatus = ProjectPageStatus.inProgress
+        : _projectPageStatus = ProjectPageStatus.complete;
+    notifyListeners();
+  }
 
   //_________PROJECT CREATOR_________
   GlobalKey<FormState> _nameKey = GlobalKey<FormState>();

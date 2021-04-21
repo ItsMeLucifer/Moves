@@ -128,7 +128,7 @@ class Firebase extends ChangeNotifier {
   }
 
   Future<void> doesProductivityDataExists(dynamic date) async {
-    documentExists = ProductivityDataInfo.Unspecified;
+    documentExists = ProductivityDataInfo.Nonexistent;
     await users
         .doc(auth.currentUser.uid)
         .collection('productivity')
