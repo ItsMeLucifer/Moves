@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-enum ProjectPageStatus { inProgress, complete }
+enum ProjectPageStatus { inProgress, complete, createNew }
 
 class AppHandler extends ChangeNotifier {
   //_________COMMON_________
@@ -65,9 +65,15 @@ class AppHandler extends ChangeNotifier {
   ProjectPageStatus _projectPageStatus = ProjectPageStatus.inProgress;
   int get projectPageStatus => _projectPageStatus.index;
   set projectPageStatus(int value) {
-    value == 0
-        ? _projectPageStatus = ProjectPageStatus.inProgress
-        : _projectPageStatus = ProjectPageStatus.complete;
+    if (value == 0) {
+      _projectPageStatus = ProjectPageStatus.inProgress;
+    }
+    if (value == 1) {
+      _projectPageStatus = ProjectPageStatus.complete;
+    }
+    if (value == 2) {
+      _projectPageStatus = ProjectPageStatus.createNew;
+    }
     notifyListeners();
   }
 

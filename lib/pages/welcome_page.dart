@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/parser.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:productivity/main.dart';
 import 'package:productivity/pages/authentication_page.dart';
 
@@ -22,13 +24,25 @@ class WelcomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final handler = watch(appHandler);
+    final String backgroundPicture = 'images/high-five.svg';
     handler.screenWidth = MediaQuery.of(context).size.width;
+    final SvgParser parser = SvgParser();
+    try {
+      parser.parse(backgroundPicture);
+      print('SVG is supported');
+    } catch (e) {
+      print('SVG contains unsupported features');
+    }
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-              width: 0,
-              child: Image.asset('images/high-five.png', fit: BoxFit.fitWidth)),
+          SafeArea(
+            child: Container(
+              width: handler.screenWidth,
+              child: SvgPicture.asset(backgroundPicture,
+                  width: handler.screenWidth),
+            ),
+          ),
           SafeArea(
             child: Row(
               children: [
@@ -37,7 +51,7 @@ class WelcomePage extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(height: 150),
+                      SizedBox(height: 180),
                       Text('Welcome to',
                           style: TextStyle(
                             fontSize: 35,
@@ -53,7 +67,7 @@ class WelcomePage extends ConsumerWidget {
                               fontFamily: handler.fontFamily,
                             )),
                       ),
-                      SizedBox(height: 150),
+                      SizedBox(height: 130),
                       Container(
                           width: (handler.screenWidth * 0.9),
                           height: 50,
