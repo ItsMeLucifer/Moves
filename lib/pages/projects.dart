@@ -5,7 +5,6 @@ import 'package:productivity/main.dart';
 import 'package:productivity/view%20model/app_handler.dart';
 import 'package:productivity/widgets/Projects%20Page/create_new_project.dart';
 import 'package:productivity/widgets/Projects%20Page/projects_list.dart';
-import 'package:productivity/widgets/project_creator.dart';
 
 class Projects extends ConsumerWidget {
   @override

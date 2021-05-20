@@ -152,4 +152,10 @@ class Firebase extends ChangeNotifier {
         .doc(date.toString())
         .set({'value': value, 'date': date});
   }
+
+  //CHARTS PAGE
+  //Trzeba sciagnac wszystkie productivity assessment z aktualnego miesiaca
+  //i przeslac je w formie List<FlSpot> do charts.dart:70
+  //FlSpot(x,y) to proste wspolrzedne ukladu kartezjanskiego, gdzie
+  // X to dzien miesiaca, a Y to productivity assesment w danym dniu
 }
