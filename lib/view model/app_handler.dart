@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 
 enum ProjectPageStatus { inProgress, complete, createNew }
 
@@ -46,6 +49,16 @@ class AppHandler extends ChangeNotifier {
   set productivityLevel(double value) {
     _productivityLevel = value;
     notifyListeners();
+  }
+
+  Future<void> fetchTodayProductivityFromDatabase() async {
+    var document = await FirebaseFirestore.instance.collection("users")
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .collection("productivity")
+        .doc(Jiffy(new DateTime.now()).format("dd.MM.y")).get();
+    var productivity  = document['value'];
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    productivityLevel = double.parse(productivity.toString());
   }
 
   final List<String> emoji = [
