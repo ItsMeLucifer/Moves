@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -150,9 +151,5 @@ class Firebase extends ChangeNotifier {
         .collection('productivity')
         .doc(date.toString())
         .set({'value': value, 'date': date});
-  }
-
-  void updateProductivityData(int value, dynamic date) {
-    //UPDATE PRODUCTIVITY DATA
   }
 }
