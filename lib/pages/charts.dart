@@ -12,15 +12,18 @@ class Charts extends ConsumerWidget {
       children: [
         Center(
           child: Text(
-            'Charts',
+            'Last Month',
             style: TextStyle(
-                fontSize: 50,
-                color: handler.textColor,
-                fontFamily: handler.fontFamily,
-                shadows: [handler.textShadow]),
+              fontSize: 30,
+              color: handler.textColor3,
+              fontFamily: handler.fontFamily,
+            ),
             textAlign: TextAlign.center,
           ),
         ),
+        SizedBox(height: 10),
+        Center(
+        )
       ],
     );
   }

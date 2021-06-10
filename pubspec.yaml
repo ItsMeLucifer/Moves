@@ -36,6 +36,7 @@ dependencies:
   smooth_page_indicator: ^0.2.1
   syncfusion_flutter_core: ^18.4.46
   syncfusion_flutter_sliders: ^18.4.44-beta
+  fl_chart: ^0.12.3
 
 dev_dependencies:
   flutter_test:
