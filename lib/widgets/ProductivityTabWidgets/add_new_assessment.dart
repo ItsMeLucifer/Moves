@@ -17,7 +17,7 @@ class AddNewAssessment extends StatefulWidget{
 class _AddNewAssessment extends State<AddNewAssessment> {
   @override
   void initState() {
-    context.read(appHandler).fetchTodayProductivityFromDatabase();
+    context.read(appHandlerViewModel).fetchTodayProductivityFromDatabase();
     // TODO: implement initState
     super.initState();
 
@@ -26,8 +26,8 @@ class _AddNewAssessment extends State<AddNewAssessment> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (_, watch, child){
-        final firebase = watch(firebaseVM);
-        final handler = watch(appHandler);
+        final firebase = watch(firebaseServiceViewModel);
+        final handler = watch(appHandlerViewModel);
         return SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

@@ -5,7 +5,7 @@ import 'package:productivity/main.dart';
 class Charts extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final handler = watch(appHandler);
+    final handler = watch(appHandlerViewModel);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,

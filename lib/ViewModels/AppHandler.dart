@@ -57,7 +57,6 @@ class AppHandler extends ChangeNotifier {
         .collection("productivity")
         .doc(Jiffy(new DateTime.now()).format("dd.MM.y")).get();
     var productivity  = document['value'];
-    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     productivityLevel = double.parse(productivity.toString());
   }
 
@@ -93,38 +92,5 @@ class AppHandler extends ChangeNotifier {
   //_________PROJECT CREATOR_________
   GlobalKey<FormState> _nameKey = GlobalKey<FormState>();
   GlobalKey<FormState> get nameKey => _nameKey;
-  String _projectName = '';
-  String get projectName => _projectName;
-  set projectName(String value) {
-    _projectName = value;
-    notifyListeners();
-  }
 
-  String _projectTags = '';
-  String get projectTags => _projectTags;
-  set projectTags(String value) {
-    _projectTags = value;
-    notifyListeners();
-  }
-
-  String _projectDescription = '';
-  String get projectDescription => _projectDescription;
-  set projectDescription(String value) {
-    _projectDescription = value;
-    notifyListeners();
-  }
-
-  double _projectProgress = 0;
-  double get projectProgress => _projectProgress;
-  set projectProgress(double value) {
-    _projectProgress = value;
-    notifyListeners();
-  }
-
-  void clearFields() {
-    projectName = '';
-    projectTags = '';
-    projectDescription = '';
-    projectProgress = 0;
-  }
 }

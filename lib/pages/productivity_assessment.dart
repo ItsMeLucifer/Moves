@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:productivity/ViewModels/FirebaseService.dart';
 import 'package:productivity/main.dart';
-import 'package:productivity/view%20model/firebase.dart';
-import 'package:productivity/widgets/Productivity%20Assessment%20Page/add_new_assessment.dart';
-import 'package:productivity/widgets/Productivity%20Assessment%20Page/update_assessment.dart';
-import 'package:jiffy/jiffy.dart';
+import 'package:productivity/widgets/ProductivityTabWidgets/add_new_assessment.dart';
+import 'package:productivity/widgets/ProductivityTabWidgets/update_assessment.dart';
 
 class ProductivityAssessment extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    //final handler = watch(appHandler);
-    final firebase = watch(firebaseVM);
-    // firebase.doesProductivityDataExists(
-    //     Jiffy(new DateTime.now()).format("dd.MM.y"));
+    final firebase = watch(firebaseServiceViewModel);
     switch (firebase.documentExists) {
       case ProductivityDataInfo.Existing:
         return UpdateAssessment();

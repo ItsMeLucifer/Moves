@@ -6,12 +6,11 @@ import 'package:flutter/material.dart';
 enum Status { Authenticated, Unauthenticated }
 enum ProductivityDataInfo { Existing, Nonexistent, Unspecified }
 
-class Firebase extends ChangeNotifier {
+class FirebaseService extends ChangeNotifier {
   //_________AUTHENTICATION_________
   FirebaseAuth _auth;
   FirebaseAuth get auth => _auth;
-  UserCredential userCredential;
-  Firebase.instance() : _auth = FirebaseAuth.instance {
+  FirebaseService.instance() : _auth = FirebaseAuth.instance {
     _auth.authStateChanges().listen(_onAuthStateChanged);
   }
   Status _status = Status.Unauthenticated;
@@ -24,7 +23,7 @@ class Firebase extends ChangeNotifier {
   User _user;
   Future<void> signIn(String email, String password) async {
     try {
-      userCredential = await _auth.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -48,7 +47,7 @@ class Firebase extends ChangeNotifier {
   Future<void> register(String email, String password, String nickname) async {
     //Przy rejestracji dodatkowo musimy dodawać nickname od razu do bazy danych uzytkownikow na firestore
     try {
-      userCredential = await _auth.createUserWithEmailAndPassword(
+     await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -72,6 +71,7 @@ class Firebase extends ChangeNotifier {
 
   //_________DATA HANDLING_________
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+  Stream stream;
   //---ACCOUNT---
   Future<void> createAnAccount(String nickname) async {
     await users.doc(auth.currentUser.uid).set({
@@ -87,12 +87,10 @@ class Firebase extends ChangeNotifier {
 
   //---PROJECTS---
   Future<void> createProject(
-      String name, String tags, String description, double progress) async {
+      String name, String description) async {
     await users.doc(auth.currentUser.uid).collection('projects').add({
       'name': name,
-      'tags': tags,
       'description': description,
-      'progress': progress
     });
   }
 
@@ -151,5 +149,15 @@ class Firebase extends ChangeNotifier {
         .collection('productivity')
         .doc(date.toString())
         .set({'value': value, 'date': date});
+  }
+  Future<void> createNewProject(String name, String description, bool completed) async {
+    Map<String, dynamic> newDocument = {
+      "name":name,
+      "description": description,
+      "completed": completed
+    };
+    await users
+        .doc(auth.currentUser.uid)
+        .collection('projects').add(newDocument);
   }
 }

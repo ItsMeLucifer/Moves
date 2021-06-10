@@ -1,13 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../main.dart';
 
 class CreateNewProject extends ConsumerWidget {
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final handler = watch(appHandler);
+    final handler = watch(appHandlerViewModel);
+    final firebaseServiceVM = watch(firebaseServiceViewModel);
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     return Form(
       key: _formKey,
@@ -38,6 +42,7 @@ class CreateNewProject extends ConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: TextFormField(
+                  controller: nameController,
                   decoration: const InputDecoration(
                       hintText: 'Type project name...',
                       border: InputBorder.none,
@@ -57,7 +62,7 @@ class CreateNewProject extends ConsumerWidget {
             Container(
               width: handler.screenWidth * 0.8,
               child: Text(
-                'Technologies/Tools',
+                'Description',
                 style: TextStyle(
                   color: handler.textColor3,
                   fontSize: 15,
@@ -76,8 +81,9 @@ class CreateNewProject extends ConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: TextFormField(
+                  controller: descriptionController,
                   decoration: const InputDecoration(
-                      hintText: 'Type some tools you used...',
+                      hintText: '...',
                       border: InputBorder.none,
                       hintStyle: TextStyle(fontSize: 15)),
                   validator: (String value) {
@@ -92,22 +98,10 @@ class CreateNewProject extends ConsumerWidget {
             SizedBox(
               height: 20,
             ),
-            Container(
-              width: handler.screenWidth * 0.8,
-              child: Text(
-                'Milestones',
-                style: TextStyle(
-                  color: handler.textColor3,
-                  fontSize: 15,
-                  fontFamily: handler.fontFamily,
-                ),
-                textAlign: TextAlign.left,
-              ),
-            ),
-            SizedBox(height: 20),
             GestureDetector(
               onTap: () {
-                print('hello');
+                firebaseServiceVM.createNewProject(nameController.text, descriptionController.text, false);
+                handler.projectPageStatus = 0;
               },
               child: Container(
                 width: handler.screenWidth * 0.45,

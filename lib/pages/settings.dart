@@ -5,8 +5,8 @@ import 'package:productivity/main.dart';
 class Settings extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final handler = watch(appHandler);
-    final firebase = watch(firebaseVM);
+    final handler = watch(appHandlerViewModel);
+    final firebase = watch(firebaseServiceViewModel);
     return Container(
       width: MediaQuery.of(context).size.width,
       child: Column(

@@ -6,8 +6,8 @@ import 'package:productivity/main.dart';
 class AuthenticationPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final handler = watch(appHandler);
-    final firebase = watch(firebaseVM);
+    final handler = watch(appHandlerViewModel);
+    final firebase = watch(firebaseServiceViewModel);
     return Scaffold(
         backgroundColor: handler.backgroundColor,
         body: SafeArea(
@@ -27,14 +27,6 @@ class AuthenticationPage extends ConsumerWidget {
                               style: TextStyle(color: handler.primaryColor),
                               controller: handler.nicknameController,
                               cursorColor: handler.primaryColor,
-                              validator: (String value) {
-                                if (value.isEmpty || value == null) {
-                                  return 'Name is Required';
-                                }
-                              },
-                              onSaved: (String value) {
-                                handler.projectName = value;
-                              },
                               decoration: InputDecoration(
                                 labelStyle:
                                     TextStyle(color: handler.primaryColor),
@@ -63,14 +55,6 @@ class AuthenticationPage extends ConsumerWidget {
                         style: TextStyle(color: handler.primaryColor),
                         controller: handler.emailController,
                         cursorColor: handler.primaryColor,
-                        validator: (String value) {
-                          if (value.isEmpty || value == null) {
-                            return 'Name is Required';
-                          }
-                        },
-                        onSaved: (String value) {
-                          handler.projectName = value;
-                        },
                         decoration: InputDecoration(
                           labelStyle: TextStyle(color: handler.primaryColor),
                           labelText: 'Email',
@@ -96,16 +80,6 @@ class AuthenticationPage extends ConsumerWidget {
                         style: TextStyle(color: handler.primaryColor),
                         controller: handler.passwordController,
                         cursorColor: handler.primaryColor,
-                        validator: (String value) {
-                          if (value.isEmpty || value == null) {
-                            return 'Name is Required';
-                          } else {
-                            return '';
-                          }
-                        },
-                        onSaved: (String value) {
-                          handler.projectName = value;
-                        },
                         decoration: InputDecoration(
                           labelStyle: TextStyle(color: handler.primaryColor),
                           labelText: 'Password',

@@ -2,15 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:productivity/main.dart';
-import 'package:productivity/view%20model/app_handler.dart';
-import 'package:productivity/widgets/Projects%20Page/create_new_project.dart';
-import 'package:productivity/widgets/Projects%20Page/projects_list.dart';
-import 'package:productivity/widgets/project_creator.dart';
+import 'package:productivity/widgets/ProjectTabWidgets/CompletedProjectList.dart';
+import 'package:productivity/widgets/ProjectTabWidgets/create_new_project.dart';
+import 'package:productivity/widgets/ProjectTabWidgets/projects_list.dart';
 
 class Projects extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final handler = watch(appHandler);
+    final handler = watch(appHandlerViewModel);
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -149,9 +148,17 @@ class Projects extends ConsumerWidget {
                 ),
               ),
               SizedBox(height: 40),
-              handler.projectPageStatus == 0 || handler.projectPageStatus == 1
-                  ? ProjectsList()
-                  : CreateNewProject()
+              Builder(
+                  builder: (_){
+                    if(handler.projectPageStatus == 0){
+                      return ProjectsList();
+                    }else if( handler.projectPageStatus == 1){
+                      return CompletedProjectList();
+                    }else if( handler.projectPageStatus == 2){
+                      return CreateNewProject();
+                    }else return Container();
+                  }
+              )
             ],
           ),
         ),

@@ -19,7 +19,7 @@ class HomeScreen extends ConsumerWidget {
       Friends(),
       Settings()
     ];
-    final handler = watch(appHandler);
+    final handler = watch(appHandlerViewModel);
     return Scaffold(
       extendBody: true,
       bottomNavigationBar: FluidNavBar(

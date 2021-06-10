@@ -23,7 +23,7 @@ Route _createRoute() {
 class WelcomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final handler = watch(appHandler);
+    final handler = watch(appHandlerViewModel);
     final String backgroundPicture = 'images/high-five.svg';
     handler.screenWidth = MediaQuery.of(context).size.width;
     final SvgParser parser = SvgParser();

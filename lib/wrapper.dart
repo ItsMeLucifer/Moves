@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:productivity/home_screen.dart';
+import 'package:productivity/MainScreen.dart';
+import 'package:productivity/ViewModels/FirebaseService.dart';
 import 'package:productivity/main.dart';
 import 'package:productivity/pages/welcome_page.dart';
-import 'package:productivity/view%20model/firebase.dart';
+
+
 
 class Wrapper extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final firebase = watch(firebaseVM);
-    switch (firebase.status) {
+    final firebaseServiceVM = watch(firebaseServiceViewModel);
+    switch (firebaseServiceVM.status) {
       case Status.Unauthenticated:
         return WelcomePage();
         break;

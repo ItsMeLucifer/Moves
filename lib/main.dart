@@ -1,16 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:productivity/utilities/wrapper.dart';
-import 'package:productivity/view%20model/app_handler.dart';
-import 'package:productivity/view%20model/firebase.dart';
-import 'package:firebase_core/firebase_core.dart' as fireBase;
+import 'package:productivity/ViewModels/AppHandler.dart';
+import 'package:productivity/ViewModels/FirebaseService.dart';
+import 'package:productivity/wrapper.dart';
 
-final appHandler = ChangeNotifierProvider((_) => AppHandler());
-final firebaseVM = ChangeNotifierProvider((_) => Firebase.instance());
+
+final appHandlerViewModel = ChangeNotifierProvider((_) => AppHandler());
+final firebaseServiceViewModel =
+    ChangeNotifierProvider((_) => FirebaseService.instance());
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await fireBase.Firebase.initializeApp();
-  //await SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+  await Firebase.initializeApp();
   runApp(ProviderScope(child: MyApp()));
 }
 
