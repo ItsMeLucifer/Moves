@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 
 enum Status { Authenticated, Unauthenticated }
 enum ProductivityDataInfo { Existing, Nonexistent, Unspecified }
@@ -150,6 +152,23 @@ class FirebaseService extends ChangeNotifier {
         .doc(date.toString())
         .set({'value': value, 'date': date});
   }
+
+  List<FlSpot> globalFlSpots = [];
+
+  Future<void> getFLSpots() async{
+    List<FlSpot> flList = [];
+    QuerySnapshot snapshot =  await users
+        .doc(auth.currentUser.uid)
+        .collection('productivity').get();
+    snapshot.docs.forEach((element) {
+      final date = Jiffy(element.id);
+      if(Jiffy(date).week == Jiffy().week){
+        flList.add(FlSpot(date.day.toDouble(), element.get("productivity")));
+      }
+    });
+    return flList;
+  }
+
   Future<void> createNewProject(String name, String description, bool completed) async {
     Map<String, dynamic> newDocument = {
       "name":name,
@@ -160,4 +179,5 @@ class FirebaseService extends ChangeNotifier {
         .doc(auth.currentUser.uid)
         .collection('projects').add(newDocument);
   }
+
 }
