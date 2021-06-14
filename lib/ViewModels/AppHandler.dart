@@ -52,12 +52,15 @@ class AppHandler extends ChangeNotifier {
   }
 
   Future<void> fetchTodayProductivityFromDatabase() async {
-    var document = await FirebaseFirestore.instance.collection("users")
+    var document = await FirebaseFirestore.instance
+        .collection("users")
         .doc(FirebaseAuth.instance.currentUser.uid)
         .collection("productivity")
-        .doc(Jiffy(new DateTime.now()).format("dd.MM.y")).get();
-    var productivity  = document['value'];
-    productivityLevel = double.parse(productivity.toString());
+        .doc(Jiffy(new DateTime.now()).format("dd.MM.y"))
+        .get();
+    var productivity = document.exists ? document['value'] : null;
+    productivityLevel =
+        productivity != null ? double.parse(productivity.toString()) : 0.0;
   }
 
   final List<String> emoji = [
@@ -92,5 +95,4 @@ class AppHandler extends ChangeNotifier {
   //_________PROJECT CREATOR_________
   GlobalKey<FormState> _nameKey = GlobalKey<FormState>();
   GlobalKey<FormState> get nameKey => _nameKey;
-
 }

@@ -10,27 +10,41 @@ class Settings extends ConsumerWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-              width: 200,
-              height: 50,
-              decoration: BoxDecoration(
-                  color: handler.secondaryColor,
-                  border: Border.all(color: handler.primaryColor, width: 5),
-                  borderRadius: BorderRadius.circular(15)),
-              child: FlatButton(
-                  onPressed: () {
-                    firebase.signOut();
-                  },
-                  child: Text(
-                    'Sign out!',
-                    style: TextStyle(
+          SizedBox(height: 32),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0, top: 16),
+            child: Text(
+              "Settings",
+              style: TextStyle(
+                color: handler.textColor3,
+                fontSize: 35,
+                fontFamily: handler.fontFamily,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ),
+          SizedBox(height: 16),
+          Center(
+            child: Container(
+                width: 150,
+                height: 40,
+                decoration: BoxDecoration(
+                    color: handler.primaryColor,
+                    borderRadius: BorderRadius.circular(25)),
+                child: FlatButton(
+                    onPressed: () {
+                      firebase.signOut();
+                    },
+                    child: Text(
+                      'Sign out!',
+                      style: TextStyle(
                         color: handler.textColor,
                         fontFamily: handler.fontFamily,
-                        shadows: [handler.textShadow]),
-                  )))
+                      ),
+                    ))),
+          )
         ],
       ),
     );

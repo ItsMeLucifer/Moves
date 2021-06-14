@@ -11,7 +11,9 @@ class Charts extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(height: 64,),
+        SizedBox(
+          height: 64,
+        ),
         Center(
           child: Text(
             'Last Week',
@@ -24,10 +26,10 @@ class Charts extends ConsumerWidget {
           ),
         ),
         SizedBox(height: 10),
-        Center(
-          child: LineChartSample2()
+        Center(child: LineChartSample2()),
+        SizedBox(
+          height: 32,
         ),
-        SizedBox(height: 32,),
         Center(
           child: Text(
             'Last Week Avg',
@@ -41,27 +43,31 @@ class Charts extends ConsumerWidget {
         ),
         Card(
           color: Color(0xff232d37),
-    shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(15.0),
-    ),
-    margin: EdgeInsets.only( top: 16),
-    elevation: 0.5,
-          child: Container(height: 150, width: 400,
-          padding: EdgeInsets.only(top: 16, bottom: 16),
-          child: Center(
-            child: Text("45% \n \n You can do better!",
-              style: TextStyle(
-                fontSize: 30,
-                color: Colors.white70,
-                fontFamily: handler.fontFamily,
-              ),
-            textAlign: TextAlign.center,),)
-        ),)
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          margin: EdgeInsets.only(top: 16),
+          elevation: 0.5,
+          child: Container(
+              height: 150,
+              width: 400,
+              padding: EdgeInsets.only(top: 16, bottom: 16),
+              child: Center(
+                child: Text(
+                  "45% \n \n You can do better!",
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.white70,
+                    fontFamily: handler.fontFamily,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              )),
+        )
       ],
     );
   }
 }
-
 
 class LineChartSample2 extends StatefulWidget {
   @override
@@ -79,7 +85,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (_, watch, child){
+      builder: (_, watch, child) {
         final firebaseServiceVM = watch(firebaseServiceViewModel);
         return Stack(
           children: <Widget>[
@@ -92,9 +98,9 @@ class _LineChartSample2State extends State<LineChartSample2> {
                     ),
                     color: Color(0xff232d37)),
                 child: Padding(
-                    padding: const EdgeInsets.only(right: 18.0, left: 12.0, top: 24, bottom: 12),
-                    child: LineChart(mainData())
-                ),
+                    padding: const EdgeInsets.only(
+                        right: 18.0, left: 12.0, top: 24, bottom: 12),
+                    child: LineChart(mainData())),
               ),
             ),
           ],
@@ -126,8 +132,10 @@ class _LineChartSample2State extends State<LineChartSample2> {
         bottomTitles: SideTitles(
           showTitles: true,
           reservedSize: 32,
-          getTextStyles: (value) =>
-          const TextStyle(color: Color(0xff68737d), fontWeight: FontWeight.bold, fontSize: 16),
+          getTextStyles: (value) => const TextStyle(
+              color: Color(0xff68737d),
+              fontWeight: FontWeight.bold,
+              fontSize: 16),
           getTitles: (value) {
             print(value);
             switch (value.toInt()) {
@@ -181,11 +189,12 @@ class _LineChartSample2State extends State<LineChartSample2> {
             }
             return '';
           },
-          reservedSize: 16,
+          reservedSize: 20,
         ),
       ),
-      borderData:
-      FlBorderData(show: true, border: Border.all(color: const Color(0xff37434d), width: 1)),
+      borderData: FlBorderData(
+          show: true,
+          border: Border.all(color: const Color(0xff37434d), width: 1)),
       minX: 0,
       maxX: 7,
       minY: 0,
@@ -210,11 +219,11 @@ class _LineChartSample2State extends State<LineChartSample2> {
           ),
           belowBarData: BarAreaData(
             show: true,
-            colors: gradientColors.map((color) => color.withOpacity(0.3)).toList(),
+            colors:
+                gradientColors.map((color) => color.withOpacity(0.3)).toList(),
           ),
         ),
       ],
     );
   }
 }
-

@@ -48,40 +48,55 @@ class ProjectsList extends ConsumerWidget {
           height: 20,
         ),
         Container(
-          width: handler.screenWidth * 0.8,
-          child: StreamBuilder(
-            stream: firebaseServiceVM.users.doc(firebaseServiceVM.auth.currentUser.uid).collection("projects").where("completed", isEqualTo: false).snapshots(),
-            builder: (_, snapshot){
-              if (snapshot.hasData){
-                return ListView.builder(
-                  itemCount: snapshot.data.docs.length,
-                  shrinkWrap: true,
-                    itemBuilder: (_, index){
-                    DocumentSnapshot document = snapshot.data.docs[index];
-                    return Dismissible(
-                        key: UniqueKey(),
-                        direction: DismissDirection.startToEnd,
-                        background: Container(
-                          color: Colors.green,
-                          child: Icon(CupertinoIcons.check_mark, color: Colors.white,),
-                        ),
-                        child: ListTile(
-                          leading: Icon(CupertinoIcons.hourglass_bottomhalf_fill),
-                          title: new Text(document.data()['name']),
-                          subtitle: new Text(document.data()['description']),
-                        ),
-                      onDismissed: (direction){
-                        firebaseServiceVM.users.doc(firebaseServiceVM.auth.currentUser.uid).collection("projects").doc(document.id).update({'completed': true});
-                      },
-                    );
-                    }
-                );
-              }else{
-                return CircularProgressIndicator();
-              }
-            },
-          )
-        ),
+            width: handler.screenWidth * 0.8,
+            child: StreamBuilder(
+              stream: firebaseServiceVM.users
+                  .doc(firebaseServiceVM.auth.currentUser.uid)
+                  .collection("projects")
+                  .where("completed", isEqualTo: false)
+                  .snapshots(),
+              builder: (_, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                      itemCount: snapshot.data.docs.length,
+                      shrinkWrap: true,
+                      itemBuilder: (_, index) {
+                        DocumentSnapshot document = snapshot.data.docs[index];
+                        return Dismissible(
+                          key: UniqueKey(),
+                          direction: DismissDirection.startToEnd,
+                          background: Container(
+                            color: Colors.green,
+                            child: Icon(
+                              CupertinoIcons.check_mark,
+                              color: Colors.white,
+                            ),
+                          ),
+                          child: ListTile(
+                            leading:
+                                Icon(CupertinoIcons.hourglass_bottomhalf_fill),
+                            title: new Text(document.data()['name']),
+                            subtitle: new Text(document.data()['description']),
+                          ),
+                          onDismissed: (direction) {
+                            firebaseServiceVM.users
+                                .doc(firebaseServiceVM.auth.currentUser.uid)
+                                .collection("projects")
+                                .doc(document.id)
+                                .update({'completed': true});
+                          },
+                        );
+                      });
+                } else {
+                  return Center(
+                    child: Container(
+                        width: 50,
+                        height: 50,
+                        child: CircularProgressIndicator()),
+                  );
+                }
+              },
+            )),
       ],
     );
   }
